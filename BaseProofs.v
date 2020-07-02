@@ -47,6 +47,25 @@ Proof.
   intros. induction t; simpl; try rewrite -> andb_true_iff; try split; auto.
 Qed.
 
+(* 𝔄 Type *)
+
+Fixpoint 𝔄_eq ( A1 : 𝔄 ) ( A2 : 𝔄 ) : bool :=
+  match A1, A2 with
+  | 𝔄0, 𝔄0 => true
+  | 𝔄1, 𝔄1 => true
+  | 𝔄mult A1' A1'', 𝔄mult A2' A2'' => andb (𝔄_eq A1' A2') (𝔄_eq A1'' A2'')
+  | 𝔄plus A1' A1'', 𝔄plus A2' A2'' => andb (𝔄_eq A1' A2') (𝔄_eq A1'' A2'')
+  | 𝔄impl A1' A1'', 𝔄impl A2' A2'' => andb (𝔄_eq A1' A2') (𝔄_eq A1'' A2'')
+  | 𝔄flor A1', 𝔄flor A2' => 𝔄_eq A1' A2'
+  | 𝔄diam A1', 𝔄diam A2' => 𝔄_eq A1' A2'
+  | _, _ => false
+  end.
+
+Definition 𝔄_eq_refl : forall t, 𝔄_eq t t = true.
+Proof.
+  intros. induction t; simpl; try rewrite -> andb_true_iff; try split; auto.
+Qed.
+
 (* Variables *)
 
 Definition var_eq ( x : 𝔵 ) ( y : 𝔵 ) : bool :=
