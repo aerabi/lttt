@@ -45,6 +45,13 @@ Inductive type : 𝔊 -> 𝔱 -> 𝔗 -> Prop :=
   | Void_E : forall Γ t T, Γ ⊢ t | Void -> Γ ⊢ 𝔱holecase t | T
   | 𝔗mult_I : forall Γ t1 t2 T1 T2, Γ ⊢ t1 | T1 -> Γ ⊢ t2 | T2 -> Γ ⊢ 𝔱pair t1 t2 | 𝔗mult T1 T2
   | 𝔗mult_E1 : forall Γ t T1 T2, Γ ⊢ t | 𝔗mult T1 T2 -> Γ ⊢ 𝔱prj 1 t | T1
+  | 𝔗mult_E2 : forall Γ t T1 T2, Γ ⊢ t | 𝔗mult T1 T2 -> Γ ⊢ 𝔱prj 2 t | T2
+  | 𝔗plus_I1 : forall Γ t T1 T2, Γ ⊢ t | T1 -> Γ ⊢ 𝔱inj 1 t | 𝔗plus T1 T2
+  | 𝔗plus_I2 : forall Γ t T1 T2, Γ ⊢ t | T2 -> Γ ⊢ 𝔱inj 2 t | 𝔗plus T1 T2
+  | 𝔗plus_E : forall Γ t t1 t2 x1 x2 T1 T2 S, Γ ⊢ t | 𝔗plus T1 T2 -> 
+      (m𝔊.append Γ x1 T1) ⊢ t1 | S -> (m𝔊.append Γ x2 T2) ⊢ t2 | S -> Γ ⊢ 𝔱case t x1 t1 x2 t2 | S
+  | 𝔗impl_I : forall Γ t x T S, (m𝔊.append Γ x T) ⊢ t | S -> Γ ⊢ 𝔱lambda x t | 𝔗impl T S
+  | 𝔗impl_E : forall Γ t1 t2 T S, Γ ⊢ t1 | 𝔗impl T S -> Γ ⊢ t2 | T -> Γ ⊢ 𝔱app t1 t2 | S
 where "Γ '⊢' t '|' T" := (type Γ t T).
 
 End DeclarativeTyping𝔗.
