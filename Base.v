@@ -36,8 +36,8 @@ Inductive 𝔱 : Type :=
   | 𝔱hole : 𝔱
   | 𝔱holecase : 𝔱 -> 𝔱
   | 𝔱pair : 𝔱 -> 𝔱 -> 𝔱
-  | 𝔱prj : nat -> 𝔱
-  | 𝔱inj : nat -> 𝔱
+  | 𝔱prj : nat -> 𝔱 -> 𝔱
+  | 𝔱inj : nat -> 𝔱 -> 𝔱
   | 𝔱case : 𝔱 -> 𝔵 -> 𝔱 -> 𝔵 -> 𝔱 -> 𝔱
   | 𝔱lambda : 𝔵 -> 𝔱 -> 𝔱
   | 𝔱app : 𝔱 -> 𝔱 -> 𝔱
