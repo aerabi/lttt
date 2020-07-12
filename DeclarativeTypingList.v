@@ -55,3 +55,21 @@ Inductive type : 𝔊 -> 𝔱 -> 𝔗 -> Prop :=
 where "Γ '⊢' t '|' T" := (type Γ t T).
 
 End DeclarativeTyping𝔗.
+
+Module Type DeclarativeTyping𝔄
+    ( m𝔵 : ModuleId )
+    ( m𝔗 : Module𝔗 )
+    ( m𝔄 : Module𝔄 )
+    ( m𝔊 : ListCtx.ListCtx m𝔵 m𝔗 )
+    ( m𝔇 : ListCtx.ListCtx m𝔵 m𝔄 ).
+
+Reserved Notation "Γ ';' Δ '⊢' t '|' T" (at level 60).
+
+Definition 𝔊 : Type := m𝔊.T.
+Definition 𝔇 : Type := m𝔇.T.
+
+Inductive type : 𝔊 -> 𝔇 -> 𝔢 -> 𝔄 -> Prop :=
+  | Var : forall Γ x A, Γ; (m𝔇.append m𝔇.empty x A) ⊢ 𝔢id x | A
+where "Γ ';' Δ '⊢' t '|' T" := (type Γ Δ t T).
+
+End DeclarativeTyping𝔄.
