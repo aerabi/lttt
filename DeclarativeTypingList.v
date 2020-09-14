@@ -70,6 +70,12 @@ Definition 𝔇 : Type := m𝔇.T.
 
 Inductive type : 𝔊 -> 𝔇 -> 𝔢 -> 𝔄 -> Prop :=
   | Var : forall Γ x A, Γ; (m𝔇.append m𝔇.empty x A) ⊢ 𝔢id x | A
+  | 𝔄0_E : forall Γ Δ e B, Γ ; Δ ⊢ e | 𝔄0 -> Γ ; Δ ⊢ 𝔢holecase e | B
+  | 𝔄1_I : forall Γ, Γ ; m𝔇.empty ⊢ 𝔢hole | 𝔄1
+  | 𝔄1_E : forall Γ Δ1 Δ2 e1 e2 B, Γ ; Δ1 ⊢ e1 | 𝔄1 -> Γ ; Δ2 ⊢ e2 | B ->
+      Γ ; (m𝔇.mult Δ1 Δ2) ⊢ 𝔢holelet e1 e2 | B
+  | 𝔄mult_E : forall Γ Δ1 Δ2 e1 e2 A1 A2, Γ ; Δ1 ⊢ e1 | A1 -> Γ ; Δ2 ⊢ e2 | A2 ->
+      Γ ; (m𝔇.mult Δ1 Δ2) ⊢ 𝔢pair e1 e2 | 𝔄mult A1 A2
 where "Γ ';' Δ '⊢' t '|' T" := (type Γ Δ t T).
 
 End DeclarativeTyping𝔄.
