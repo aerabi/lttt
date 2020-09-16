@@ -48,7 +48,7 @@ Inductive type : 𝔊 -> 𝔱 -> 𝔗 -> Prop :=
   | 𝔗mult_E2 : forall Γ t T1 T2, Γ ⊢ t | 𝔗mult T1 T2 -> Γ ⊢ 𝔱prj 2 t | T2
   | 𝔗plus_I1 : forall Γ t T1 T2, Γ ⊢ t | T1 -> Γ ⊢ 𝔱inj 1 t | 𝔗plus T1 T2
   | 𝔗plus_I2 : forall Γ t T1 T2, Γ ⊢ t | T2 -> Γ ⊢ 𝔱inj 2 t | 𝔗plus T1 T2
-  | 𝔗plus_E : forall Γ t t1 t2 x1 x2 T1 T2 S, Γ ⊢ t | 𝔗plus T1 T2 -> 
+  | 𝔗plus_E : forall Γ t t1 t2 x1 x2 T1 T2 S, Γ ⊢ t | 𝔗plus T1 T2 ->
       (m𝔊.append Γ x1 T1) ⊢ t1 | S -> (m𝔊.append Γ x2 T2) ⊢ t2 | S -> Γ ⊢ 𝔱case t x1 t1 x2 t2 | S
   | 𝔗impl_I : forall Γ t x T S, (m𝔊.append Γ x T) ⊢ t | S -> Γ ⊢ 𝔱lambda x t | 𝔗impl T S
   | 𝔗impl_E : forall Γ t1 t2 T S, Γ ⊢ t1 | 𝔗impl T S -> Γ ⊢ t2 | T -> Γ ⊢ 𝔱app t1 t2 | S
@@ -74,8 +74,19 @@ Inductive type : 𝔊 -> 𝔇 -> 𝔢 -> 𝔄 -> Prop :=
   | 𝔄1_I : forall Γ, Γ ; m𝔇.empty ⊢ 𝔢hole | 𝔄1
   | 𝔄1_E : forall Γ Δ1 Δ2 e1 e2 B, Γ ; Δ1 ⊢ e1 | 𝔄1 -> Γ ; Δ2 ⊢ e2 | B ->
       Γ ; (m𝔇.mult Δ1 Δ2) ⊢ 𝔢holelet e1 e2 | B
-  | 𝔄mult_E : forall Γ Δ1 Δ2 e1 e2 A1 A2, Γ ; Δ1 ⊢ e1 | A1 -> Γ ; Δ2 ⊢ e2 | A2 ->
+  | 𝔄mult_I : forall Γ Δ1 Δ2 e1 e2 A1 A2, Γ ; Δ1 ⊢ e1 | A1 -> Γ ; Δ2 ⊢ e2 | A2 ->
       Γ ; (m𝔇.mult Δ1 Δ2) ⊢ 𝔢pair e1 e2 | 𝔄mult A1 A2
+  | 𝔄mult_E : forall Γ Δ1 Δ2 e1 e2 x1 x2 A1 A2 B,
+      Γ ; Δ1 ⊢ e1 | 𝔄mult A1 A2 ->
+      Γ ; (m𝔇.append (m𝔇.append Δ2 x1 A1) x2 A2) ⊢ e2 | B ->
+      Γ ; (m𝔇.mult Δ1 Δ2) ⊢ 𝔢let x1 x2 e1 e2 | B
+  | 𝔄plus_I1 : forall Γ Δ e A1 A2, Γ ; Δ ⊢ e | A1 -> Γ ; Δ ⊢ 𝔢inj 1 e | 𝔄plus A1 A2
+  | 𝔄plus_I2 : forall Γ Δ e A1 A2, Γ ; Δ ⊢ e | A2 -> Γ ; Δ ⊢ 𝔢inj 2 e | 𝔄plus A1 A2
+  | 𝔄plus_E : forall Γ Δ1 Δ2 e e1 e2 x1 x2 A1 A2 B,
+      Γ ; Δ1 ⊢ e | 𝔄plus A1 A2 ->
+      Γ ; (m𝔇.append Δ2 x1 A1) ⊢ e1 | B ->
+      Γ ; (m𝔇.append Δ2 x2 A2) ⊢ e2 | B ->
+      Γ ; (m𝔇.mult Δ1 Δ2) ⊢ 𝔢case e x1 e1 x2 e2 | B
 where "Γ ';' Δ '⊢' t '|' T" := (type Γ Δ t T).
 
 End DeclarativeTyping𝔄.

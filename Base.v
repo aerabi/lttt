@@ -48,8 +48,8 @@ with 𝔢 : Type :=
   | 𝔢holecase : 𝔢 -> 𝔢
   | 𝔢holelet : 𝔢 -> 𝔢 -> 𝔢
   | 𝔢pair : 𝔢 -> 𝔢 -> 𝔢
-  | 𝔢let : 𝔵 -> 𝔵 -> 𝔢 -> 𝔢
-  | 𝔢inj : nat -> 𝔢
+  | 𝔢let : 𝔵 -> 𝔵 -> 𝔢 -> 𝔢 -> 𝔢
+  | 𝔢inj : nat -> 𝔢 -> 𝔢
   | 𝔢case : 𝔢 -> 𝔵 -> 𝔢 -> 𝔵 -> 𝔢 -> 𝔢
   | 𝔢lambda : 𝔵 -> 𝔢 -> 𝔢
   | 𝔢app : 𝔢 -> 𝔢 -> 𝔢
