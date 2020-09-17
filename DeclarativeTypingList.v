@@ -87,6 +87,14 @@ Inductive type : 𝔊 -> 𝔇 -> 𝔢 -> 𝔄 -> Prop :=
       Γ ; (m𝔇.append Δ2 x1 A1) ⊢ e1 | B ->
       Γ ; (m𝔇.append Δ2 x2 A2) ⊢ e2 | B ->
       Γ ; (m𝔇.mult Δ1 Δ2) ⊢ 𝔢case e x1 e1 x2 e2 | B
+  | 𝔄impl_I : forall Γ Δ e x A B, Γ ; (m𝔇.append Δ x A) ⊢ e | B -> Γ ; Δ ⊢ 𝔢lambda x e | 𝔄impl A B
+  | 𝔄impl_E : forall Γ Δ1 Δ2 e1 e2 A B, Γ ; Δ1 ⊢ e1 | 𝔄impl A B -> Γ ; Δ2 ⊢ e2 | A ->
+     Γ ; (m𝔇.mult Δ1 Δ2) ⊢ 𝔢app e1 e2 | B
+  | 𝔄diam_I : forall Γ Δ e A, Γ ; Δ ⊢ e | A -> Γ ; Δ ⊢ 𝔢return e | 𝔄diam A
+  | 𝔄diam_E : forall Γ Δ1 Δ2 e1 e2 x A B,
+     Γ ; Δ1 ⊢ e1 | 𝔄diam A ->
+     Γ ; (m𝔇.append Δ2 x A) ⊢ e2 | 𝔄diam B ->
+     Γ ; (m𝔇.mult Δ1 Δ2) ⊢ 𝔢bind x e1 e2 | 𝔄diam B
 where "Γ ';' Δ '⊢' t '|' T" := (type Γ Δ t T).
 
 End DeclarativeTyping𝔄.
