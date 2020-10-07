@@ -8,4 +8,4 @@ This repository is an implementation of linear temporal types, based on the foll
 - \[2] Jennifer Paykin et al., "Linear Temporal Type Theory for Event-based Reactive Programming".
 
 ## Interpret
-The CoqIDE version 8.4pl3 (January 2014) on Linux Ubuntu 14.04 was used to compile the code written here.
+The CoqIDE version 8.12.0 on Linux Ubuntu 20.04.1 was used to compile the code written here.
