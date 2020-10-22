@@ -3,8 +3,6 @@ Require Import Base.
 Require Import Coq.Bool.Bool.
 Require Import Coq.Setoids.Setoid.
 
-Require Import ssreflect.
-
 (* Natural Numbers *)
 
 Fixpoint nat_eq ( m : nat ) ( n : nat ) : bool :=

@@ -372,7 +372,7 @@ Module Type ListCtx
     - intros. unfold not in H. (*
       assert (Ht : (KM.equal k' k && VM.equal v' v) = true \/ KM.equal k' k <> true). 
       { apply classic. } *) admit.
-  Qed.
+  Admitted.
 
   (* Set Minus *)
   Fixpoint set_minus (s s' : T) : T :=
