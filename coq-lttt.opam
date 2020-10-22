@@ -1,0 +1,31 @@
+opam-version: "2.0"
+maintainer: "palmskog@gmail.com"
+version: "dev"
+
+homepage: "https://github.com/aerabi/lttt"
+dev-repo: "git+https://github.com/aerabi/lttt.git"
+bug-reports: "https://github.com/aerabi/lttt/issues"
+license: "MIT"
+
+synopsis: "An implementation of linear temporal types"
+description: """
+An implementation of linear temporal types
+"""
+
+build: [make "-j%{jobs}%" ]
+install: [make "install"]
+depends: [
+  "coq" 
+]
+
+tags: [
+  "category:Mathematics/Logic/Type theory"
+  "keyword:linear types"
+  "keyword:temporal type theory"
+  "keyword:typing"
+  "keyword:type theory"
+  "logpath:LTTT"
+]
+authors: [
+  "Mohammad-Ali A'RÂBI <aerabi@gmx.de>"
+]
