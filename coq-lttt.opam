@@ -16,6 +16,7 @@ build: [make "-j%{jobs}%" ]
 install: [make "install"]
 depends: [
   "coq" 
+  "coq-generic-environments" 
 ]
 
 tags: [

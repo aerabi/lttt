@@ -4,3 +4,4 @@ Base.v
 BaseProofs.v
 ListCtx.v
 DeclarativeTypingList.v
+DeclarativeTypingGE.v

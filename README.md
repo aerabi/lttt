@@ -17,7 +17,8 @@ An implementation of linear temporal types
   - Mohammad-Ali A'RÂBI
 - License: [MIT license](LICENSE)
 - Compatible Coq versions: Coq 8.4 or higher
-- Additional dependencies: none
+- Additional dependencies:
+  - [Coq Generic Environments](https://github.com/coq-community/generic-environments) which is used for typing and semantics
 - Coq namespace: `LTTT`
 - Related publication(s):
   - [The Essence of Event-Driven Programming](https://128.232.0.20/~nk480/essence-of-events.pdf) 
