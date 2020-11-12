@@ -471,17 +471,6 @@ Module Type ListCtx
     intros. simpl. rewrite -> remove_not_contained_pair; auto.
   Qed.
 
-  (* Pair Uniqueness *)
-  Lemma unique_append : forall (A : T) (k : K) (v : V), 
-    contains A k v -> append A k v = A.
-  Proof.
-   intros. apply extensionality. unfold eq. split; unfold subseteq; intros k' v'.
-    - intros H'. inversion H'.
-      + subst k0 v0. inversion H0. subst s' k' v'. apply H.
-      + subst k0 v0 s' k'0 v'0. apply H5.
-    - intros H'. apply contains_append_set. apply H'.
-  Qed.
-
   (* Allocate *)
   Parameter alloc : T -> K.
 
