@@ -1,6 +1,6 @@
--R . LTTT
+-R src LTTT
 
-Base.v
-BaseProofs.v
-ListCtx.v
-DeclarativeTypingList.v
+src/Base.v
+src/BaseProofs.v
+src/ListCtx.v
+src/DeclarativeTypingList.v
