@@ -98,3 +98,28 @@ Inductive type : 𝔊 -> 𝔇 -> 𝔢 -> 𝔄 -> Prop :=
 where "Γ ';' Δ '⊢' t '|' T" := (type Γ Δ t T).
 
 End DeclarativeTyping𝔄.
+
+Module Type DeclarativeTyping𝔗𝔄
+    ( m𝔵 : ModuleId )
+    ( m𝔗 : Module𝔗 )
+    ( m𝔄 : Module𝔄 )
+    ( m𝔊 : ListCtx.ListCtx m𝔵 m𝔗 )
+    ( m𝔇 : ListCtx.ListCtx m𝔵 m𝔄 )
+    ( T𝔗 : DeclarativeTyping𝔗 m𝔵 m𝔗 m𝔊 )
+    ( T𝔄 : DeclarativeTyping𝔄 m𝔵 m𝔗 m𝔄 m𝔊 m𝔇 ).
+
+Definition type𝔗 := T𝔗.type.
+Definition type𝔄 := T𝔄.type.
+
+Notation "Γ '⊩' t '|' T" := (type𝔗 Γ t T) (at level 60).
+Notation "Γ ';' Δ '⊢' t '|' T" := (type𝔄 Γ Δ t T) (at level 60).
+
+Axiom 𝔗ceil_I : forall Γ e A, Γ ; m𝔇.empty ⊢ e | A -> Γ ⊩ 𝔱suspend e | ⌈A⌉.
+Axiom 𝔗ceil_E : forall Γ t A, Γ ⊩ t | ⌈A⌉ -> Γ ; m𝔇.empty ⊢ 𝔢force t | A.
+Axiom 𝔄flor_I : forall Γ t T, Γ ⊩ t | T -> Γ ; m𝔇.empty ⊢ 𝔢flor t | ⌊T⌋.
+Axiom 𝔄flor_E : forall Γ Δ1 Δ2 e1 e2 x T B,
+  Γ ; Δ1 ⊢ e1 | ⌊T⌋ ->
+  m𝔊.append Γ x T ; Δ2 ⊢ e2 | B ->
+  Γ ; m𝔇.mult Δ1 Δ2 ⊢ 𝔢florlet x e1 e2 | B.
+
+End DeclarativeTyping𝔗𝔄.
