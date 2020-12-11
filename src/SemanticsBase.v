@@ -34,9 +34,9 @@ Definition 𝔫2𝔢 (n : 𝔫) :=
   | 𝔫flor v => 𝔢flor (𝔳2𝔱 v) 
   end.
 
-Fixpoint 𝔱subst (t : 𝔱) (x : 𝔵) (v : 𝔳) : 𝔱 :=
+Fixpoint 𝔱subst (t : 𝔱) (x : 𝔵) (v : 𝔱) : 𝔱 :=
   match t with
-  | 𝔱id x' => (match var_eq x x' with true => 𝔳2𝔱 v | false => t end)
+  | 𝔱id x' => (match var_eq x x' with true => v | false => t end)
   | 𝔱hole => t
   | 𝔱holecase t' => 𝔱holecase (𝔱subst t' x v)
   | 𝔱pair t1 t2 => 𝔱pair (𝔱subst t1 x v) (𝔱subst t2 x v)
