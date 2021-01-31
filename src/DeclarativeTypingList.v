@@ -4,7 +4,7 @@ Require Import ListCtx.
 
 Require Import Coq.Bool.Bool.
 
-Module Type Module𝔗 <: ValModuleType.
+Module module𝔗 <: ValModuleType.
 
   Definition T := 𝔗.
   Definition equal : T -> T -> bool := 𝔗_eq.
@@ -14,9 +14,9 @@ Module Type Module𝔗 <: ValModuleType.
     intros. apply 𝔗_eq_refl.
   Qed.
 
-End Module𝔗.
+End module𝔗.
 
-Module Type Module𝔄 <: ValModuleType.
+Module module𝔄 <: ValModuleType.
 
   Definition T := 𝔄.
   Definition equal : T -> T -> bool := 𝔄_eq.
@@ -26,16 +26,19 @@ Module Type Module𝔄 <: ValModuleType.
     intros. apply 𝔄_eq_refl.
   Qed.
 
-End Module𝔄.
+End module𝔄.
+
+(* Stores *)
+
+Module m𝔊 := ListCtx.ListCtx moduleId module𝔗.
+Module m𝔇 := ListCtx.ListCtx moduleId module𝔄.
+
+Definition 𝔊 : Type := m𝔊.T.
+Definition 𝔇 : Type := m𝔇.T.
 
 (* Declarative Typing Rules for Type 𝔗 *)
 
-Module Type DeclarativeTyping𝔗
-    ( m𝔵 : ModuleId )
-    ( m𝔗 : Module𝔗 )
-    ( m𝔊 : ListCtx.ListCtx m𝔵 m𝔗 ).
-
-Definition 𝔊 : Type := m𝔊.T.
+Module DeclarativeTyping𝔗.
 
 Reserved Notation "Γ '⊢' t '|' T" (at level 60).
 
@@ -56,17 +59,9 @@ where "Γ '⊢' t '|' T" := (type Γ t T).
 
 End DeclarativeTyping𝔗.
 
-Module Type DeclarativeTyping𝔄
-    ( m𝔵 : ModuleId )
-    ( m𝔗 : Module𝔗 )
-    ( m𝔄 : Module𝔄 )
-    ( m𝔊 : ListCtx.ListCtx m𝔵 m𝔗 )
-    ( m𝔇 : ListCtx.ListCtx m𝔵 m𝔄 ).
+Module DeclarativeTyping𝔄.
 
 Reserved Notation "Γ ';' Δ '⊢' t '|' T" (at level 60).
-
-Definition 𝔊 : Type := m𝔊.T.
-Definition 𝔇 : Type := m𝔇.T.
 
 Inductive type : 𝔊 -> 𝔇 -> 𝔢 -> 𝔄 -> Prop :=
   | Var : forall Γ x A, Γ; (m𝔇.append m𝔇.empty x A) ⊢ 𝔢id x | A
@@ -99,14 +94,10 @@ where "Γ ';' Δ '⊢' t '|' T" := (type Γ Δ t T).
 
 End DeclarativeTyping𝔄.
 
-Module Type DeclarativeTyping𝔗𝔄
-    ( m𝔵 : ModuleId )
-    ( m𝔗 : Module𝔗 )
-    ( m𝔄 : Module𝔄 )
-    ( m𝔊 : ListCtx.ListCtx m𝔵 m𝔗 )
-    ( m𝔇 : ListCtx.ListCtx m𝔵 m𝔄 )
-    ( T𝔗 : DeclarativeTyping𝔗 m𝔵 m𝔗 m𝔊 )
-    ( T𝔄 : DeclarativeTyping𝔄 m𝔵 m𝔗 m𝔄 m𝔊 m𝔇 ).
+Module DeclarativeTyping𝔗𝔄.
+
+Module T𝔗 := DeclarativeTyping𝔗.
+Module T𝔄 := DeclarativeTyping𝔄.
 
 Definition type𝔗 := T𝔗.type.
 Definition type𝔄 := T𝔄.type.
