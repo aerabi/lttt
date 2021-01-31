@@ -1,9 +1,13 @@
+<!---
+This file was generated from `meta.yml`, please do not edit manually.
+Follow the instructions on https://github.com/coq-community/templates to regenerate.
+--->
 # Linear Temporal Type Theory
 
-[![CI][action-shield]][action-link]
+[![Docker CI][docker-action-shield]][docker-action-link]
 
-[action-shield]: https://github.com/aerabi/lttt/workflows/CI/badge.svg?branch=master
-[action-link]: https://github.com/aerabi/lttt/actions?query=workflow%3ACI
+[docker-action-shield]: https://github.com/aerabi/lttt/workflows/Docker%20CI/badge.svg?branch=master
+[docker-action-link]: https://github.com/aerabi/lttt/actions?query=workflow:"Docker%20CI"
 
 
 
@@ -16,8 +20,9 @@ An implementation of linear temporal types
 - Author(s):
   - Mohammad-Ali A'RÂBI
 - License: [MIT license](LICENSE)
-- Compatible Coq versions: Coq 8.4 or higher
-- Additional dependencies: none
+- Compatible Coq versions: Coq 8.7 to 8.11
+- Additional dependencies:
+  - Quickchick
 - Coq namespace: `LTTT`
 - Related publication(s):
   - [The Essence of Event-Driven Programming](https://128.232.0.20/~nk480/essence-of-events.pdf) 

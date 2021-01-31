@@ -23,7 +23,7 @@ Module Type ValModuleType.
 
 End ValModuleType.
 
-Module Type ModuleId <: KeyModuleType.
+Module moduleId <: KeyModuleType.
 
   Definition T := 𝔵.
   Definition equal : T -> T -> bool := var_eq.
@@ -39,9 +39,9 @@ Module Type ModuleId <: KeyModuleType.
     apply nat_eq_to_eq in H1; subst n0; reflexivity.
   Qed.
 
-End ModuleId.
+End moduleId.
 
-Module Type ListCtx  
+Module ListCtx  
   ( KM : KeyModuleType ) 
   ( VM : ValModuleType ).
 
@@ -470,8 +470,5 @@ Module Type ListCtx
   Proof.
     intros. simpl. rewrite -> remove_not_contained_pair; auto.
   Qed.
-
-  (* Allocate *)
-  Parameter alloc : T -> K.
 
 End ListCtx.
