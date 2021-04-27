@@ -1,7 +1,14 @@
 Require Import Base.
 
+Require Import Classical_Prop.
+
 Require Import Coq.Bool.Bool.
+Require Import Coq.Bool.Sumbool.
 Require Import Coq.Setoids.Setoid.
+
+From mathcomp Require Import ssreflect ssrfun ssrbool.
+
+From QuickChick Require Import QuickChick.
 
 (* Natural Numbers *)
 
@@ -70,8 +77,38 @@ Qed.
 Corollary 𝔗_eq_refl : forall t, 𝔗_eq t t = true.
 Proof. apply 𝔗𝔄_eq_refl. Qed.
 
-Definition 𝔄_eq_refl : forall t, 𝔄_eq t t = true.
+Corollary 𝔄_eq_refl : forall t, 𝔄_eq t t = true.
 Proof. apply 𝔗𝔄_eq_refl. Qed.
+
+Axiom 𝔗_ext : forall T1 T2, (𝔗_eq T1 T2) = true -> T1 = T2.
+
+Corollary 𝔗_ext_false : forall T1 T2, (𝔗_eq T1 T2) = false -> T1 <> T2.
+Proof.
+  intros. unfold not. intros H'. subst T2. rewrite -> 𝔗_eq_refl in H. inversion H.
+Qed.
+
+Axiom 𝔄_ext : forall A1 A2, (𝔄_eq A1 A2) = true -> A1 = A2.
+
+Corollary 𝔄_ext_false : forall A1 A2, (𝔄_eq A1 A2) = false -> A1 <> A2.
+Proof.
+  intros. unfold not. intros H'. subst A2. rewrite -> 𝔄_eq_refl in H. inversion H.
+Qed.
+
+Instance 𝔗_eq_dec ( T1 T2 : 𝔗 ) : Dec ( T1 = T2 ).
+Proof.
+  constructor. unfold ssrbool.decidable. assert (H : { 𝔗_eq T1 T2 = true } + { 𝔗_eq T1 T2 = false }).
+  { apply sumbool_of_bool. } inversion H.
+  - apply left. apply 𝔗_ext. auto.
+  - apply right. apply 𝔗_ext_false. auto.
+Qed.
+
+Instance 𝔄_eq_dec ( A1 A2 : 𝔄 ) : Dec ( A1 = A2 ).
+Proof.
+  constructor. unfold ssrbool.decidable. assert (H : { 𝔄_eq A1 A2 = true } + { 𝔄_eq A1 A2 = false }).
+  { apply sumbool_of_bool. } inversion H.
+  - apply left. apply 𝔄_ext. auto.
+  - apply right. apply 𝔄_ext_false. auto.
+Qed.
 
 (* Variables *)
 
