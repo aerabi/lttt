@@ -8,6 +8,7 @@ Require Import String. Open Scope string.
 
 Require Import Base.
 Require Import BaseGen.
+Require Import BaseShow.
 Require Import BaseProofs.
 Require Import ListCtx.
 Require Import ListCtxGen.
@@ -24,4 +25,10 @@ Definition 𝔱_preservation_fun (Γ : m𝔊.T) (t t' : 𝔱) (T : 𝔗) :=
     (type𝔗 Γ t T -> 𝔱sem t t' -> type𝔗 Γ t' T).
 
 Import BaseGen.
+Import BaseShow.
+Import BaseProofs.
 Import ListCtxGen.
+
+Definition 𝔗_fun (T : 𝔗) := 𝔗_eq T T.
+
+QuickChick 𝔗_fun.
