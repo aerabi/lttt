@@ -375,6 +375,22 @@ Module ListCtx
     reflexivity.
   Qed.
 
+  Proposition append_commut_weak : forall s k v k' v', 
+      k <> k' -> append (append s k v) k' v' = append (append s k' v') k v.
+  Proof.
+    intros. apply extensionality. unfold eq. split.
+    - unfold subseteq. intros k'' v'' H''. inversion H''; try inversion H5.
+      + inversion H0. apply contains_append_set. apply contains_append with (s' := s). reflexivity. intros [=].
+        rewrite <- H8 in H6. rewrite -> H6 in H. unfold not in H. apply H. reflexivity.
+      + inversion H7. eapply contains_append. reflexivity.
+      + apply contains_append_set; auto. apply contains_append_set; auto.
+    - unfold subseteq. intros k'' v'' H''. inversion H''; try inversion H5.
+      + inversion H0. apply contains_append_set. apply contains_append with (s' := s). reflexivity. intros [=].
+        rewrite <- H8 in H6. rewrite -> H6 in H. unfold not in H. apply H. reflexivity.
+      + inversion H7. eapply contains_append. reflexivity.
+      + apply contains_append_set; auto. apply contains_append_set; auto.
+  Qed.
+
   (* Remove Key *)
   Fixpoint remove (A : T) (k : K) : T :=
     match A with
