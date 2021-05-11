@@ -5,14 +5,17 @@ Follow the instructions on https://github.com/coq-community/templates to regener
 # Linear Temporal Type Theory
 
 [![Docker CI][docker-action-shield]][docker-action-link]
+[![DOI][doi-shield]][doi-link]
 
 [docker-action-shield]: https://github.com/aerabi/lttt/workflows/Docker%20CI/badge.svg?branch=master
 [docker-action-link]: https://github.com/aerabi/lttt/actions?query=workflow:"Docker%20CI"
 
 
 
+[doi-shield]: https://zenodo.org/badge/DOI/10.5281/zenodo.4749276.svg
+[doi-link]: https://doi.org/10.5281/zenodo.4749276
 
-An implementation of linear temporal types
+An implementation of Linear-Time Temporal Type Theory
 
 
 ## Meta
