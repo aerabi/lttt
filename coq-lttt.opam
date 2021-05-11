@@ -10,9 +10,9 @@ dev-repo: "git+https://github.com/aerabi/lttt.git"
 bug-reports: "https://github.com/aerabi/lttt/issues"
 license: "MIT"
 
-synopsis: "An implementation of linear temporal types"
+synopsis: "An implementation of Linear-Time Temporal Type Theory"
 description: """
-An implementation of linear temporal types
+An implementation of Linear-Time Temporal Type Theory
 """
 
 build: [make "-j%{jobs}%" ]
