@@ -7,6 +7,7 @@ src/DeclarativeTypingList.v
 src/SemanticsBase.v
 src/OperationalSemantics.v
 src/Results.v
+src/Lemmas.v
 
 src/quickchick/BaseGen.v
 src/quickchick/BaseShow.v
