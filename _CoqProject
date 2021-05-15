@@ -1,14 +1,15 @@
 -R src LTTT
 
 src/Base.v
-src/BaseGen.v
 src/BaseProofs.v
-src/BaseShow.v
 src/ListCtx.v
-src/ListCtxGen.v
-src/ListCtxShow.v
 src/DeclarativeTypingList.v
 src/SemanticsBase.v
 src/OperationalSemantics.v
-src/QuickChick.v
 src/Results.v
+
+src/quickchick/BaseGen.v
+src/quickchick/BaseShow.v
+src/quickchick/ListCtxGen.v
+src/quickchick/ListCtxShow.v
+src/quickchick/QuickChick.v
