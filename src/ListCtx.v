@@ -100,6 +100,12 @@ Module ListCtx
     intros. induction m; simpl; reflexivity.
   Qed.
 
+  Proposition inverse : forall s1 s2, s1 o s2 = null -> s1 = null /\ s2 = null.
+  Proof.
+    intros. induction s1; induction s2; auto.
+    simpl in H. inversion H.
+  Qed.
+
   Proposition append_to_concat : forall s' k v, 
     append s' k v = s' o (append empty k v).
   Proof.

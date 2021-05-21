@@ -10,7 +10,7 @@ Inductive 𝔱sem : 𝔱 -> 𝔱 -> Prop :=
 
 Inductive 𝔢sem : 𝔢 -> 𝔢 -> Prop :=
   | 𝔢sem_let_hole : forall e, 𝔢sem (𝔢holelet (𝔢hole) e) e
-  | 𝔢sem_let : forall x1 x2 e1 e2 e, 𝔢sem (𝔢let x1 x2 (𝔢pair e1 e2) e) (𝔢subst (𝔢subst e x1 e1) x2 e2)
+  | 𝔢sem_let : forall x1 x2 e1 e2 e, x1 <> x2 -> 𝔢sem (𝔢let x1 x2 (𝔢pair e1 e2) e) (𝔢subst (𝔢subst e x1 e1) x2 e2)
   | 𝔢sem_app : forall x e1 e2, 𝔢sem (𝔢app (𝔢lambda x e1) e2) (𝔢subst e1 x e2)
   | 𝔢sem_bind : forall x e1 e2, 𝔢sem (𝔢bind x (𝔢return e1) e2) (𝔢subst e2 x e1)
   | 𝔢sem_force_suspend : forall e, 𝔢sem (𝔢force (𝔱suspend e)) e
